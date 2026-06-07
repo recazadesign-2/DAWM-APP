@@ -16,7 +16,7 @@ import {
   Mail,
 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { toast } from "sonner";
 import { BottomTabBar } from "@/components/BottomTabBar";
 import { Button } from "@/components/ui/button";
