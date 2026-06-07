@@ -9,38 +9,550 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ThemesRouteImport } from './routes/themes'
+import { Route as StatsRouteImport } from './routes/stats'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ReadingRouteImport } from './routes/reading'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as PremiumRouteImport } from './routes/premium'
+import { Route as PrayerRouteImport } from './routes/prayer'
+import { Route as LandingRouteImport } from './routes/landing'
+import { Route as GoalsRouteImport } from './routes/goals'
+import { Route as FamilyRouteImport } from './routes/family'
+import { Route as DhikrRouteImport } from './routes/dhikr'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CompletionRouteImport } from './routes/completion'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as GoalsSetupRouteImport } from './routes/goals.setup'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminSupportRouteImport } from './routes/admin.support'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminPremiumRouteImport } from './routes/admin.premium'
+import { Route as AdminNotificationsRouteImport } from './routes/admin.notifications'
+import { Route as AdminGamificationRouteImport } from './routes/admin.gamification'
+import { Route as AdminEngineRouteImport } from './routes/admin.engine'
+import { Route as AdminEditorRouteImport } from './routes/admin.editor'
+import { Route as AdminContentRouteImport } from './routes/admin.content'
+import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
+import { Route as AdminAdvancedRouteImport } from './routes/admin.advanced'
+import { Route as ApiPublicVapidKeyRouteImport } from './routes/api/public.vapid-key'
+import { Route as ApiAdminSendPushRouteImport } from './routes/api/admin.send-push'
+import { Route as ApiPublicHooksSendScheduledRouteImport } from './routes/api/public.hooks.send-scheduled'
+import { Route as ApiPublicHooksPrayerTickRouteImport } from './routes/api/public.hooks.prayer-tick'
 
+const ThemesRoute = ThemesRouteImport.update({
+  id: '/themes',
+  path: '/themes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatsRoute = StatsRouteImport.update({
+  id: '/stats',
+  path: '/stats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReadingRoute = ReadingRouteImport.update({
+  id: '/reading',
+  path: '/reading',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PremiumRoute = PremiumRouteImport.update({
+  id: '/premium',
+  path: '/premium',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrayerRoute = PrayerRouteImport.update({
+  id: '/prayer',
+  path: '/prayer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LandingRoute = LandingRouteImport.update({
+  id: '/landing',
+  path: '/landing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GoalsRoute = GoalsRouteImport.update({
+  id: '/goals',
+  path: '/goals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FamilyRoute = FamilyRouteImport.update({
+  id: '/family',
+  path: '/family',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DhikrRoute = DhikrRouteImport.update({
+  id: '/dhikr',
+  path: '/dhikr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompletionRoute = CompletionRouteImport.update({
+  id: '/completion',
+  path: '/completion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const GoalsSetupRoute = GoalsSetupRouteImport.update({
+  id: '/setup',
+  path: '/setup',
+  getParentRoute: () => GoalsRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSupportRoute = AdminSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPremiumRoute = AdminPremiumRouteImport.update({
+  id: '/premium',
+  path: '/premium',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminNotificationsRoute = AdminNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminGamificationRoute = AdminGamificationRouteImport.update({
+  id: '/gamification',
+  path: '/gamification',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEngineRoute = AdminEngineRouteImport.update({
+  id: '/engine',
+  path: '/engine',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEditorRoute = AdminEditorRouteImport.update({
+  id: '/editor',
+  path: '/editor',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminContentRoute = AdminContentRouteImport.update({
+  id: '/content',
+  path: '/content',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAdvancedRoute = AdminAdvancedRouteImport.update({
+  id: '/advanced',
+  path: '/advanced',
+  getParentRoute: () => AdminRoute,
+} as any)
+const ApiPublicVapidKeyRoute = ApiPublicVapidKeyRouteImport.update({
+  id: '/api/public/vapid-key',
+  path: '/api/public/vapid-key',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminSendPushRoute = ApiAdminSendPushRouteImport.update({
+  id: '/api/admin/send-push',
+  path: '/api/admin/send-push',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicHooksSendScheduledRoute =
+  ApiPublicHooksSendScheduledRouteImport.update({
+    id: '/api/public/hooks/send-scheduled',
+    path: '/api/public/hooks/send-scheduled',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksPrayerTickRoute =
+  ApiPublicHooksPrayerTickRouteImport.update({
+    id: '/api/public/hooks/prayer-tick',
+    path: '/api/public/hooks/prayer-tick',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/completion': typeof CompletionRoute
+  '/contact': typeof ContactRoute
+  '/dhikr': typeof DhikrRoute
+  '/family': typeof FamilyRoute
+  '/goals': typeof GoalsRouteWithChildren
+  '/landing': typeof LandingRoute
+  '/prayer': typeof PrayerRoute
+  '/premium': typeof PremiumRoute
+  '/profile': typeof ProfileRoute
+  '/reading': typeof ReadingRoute
+  '/settings': typeof SettingsRoute
+  '/stats': typeof StatsRoute
+  '/themes': typeof ThemesRoute
+  '/admin/advanced': typeof AdminAdvancedRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/content': typeof AdminContentRoute
+  '/admin/editor': typeof AdminEditorRoute
+  '/admin/engine': typeof AdminEngineRoute
+  '/admin/gamification': typeof AdminGamificationRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/premium': typeof AdminPremiumRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/support': typeof AdminSupportRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/goals/setup': typeof GoalsSetupRoute
+  '/admin/': typeof AdminIndexRoute
+  '/api/admin/send-push': typeof ApiAdminSendPushRoute
+  '/api/public/vapid-key': typeof ApiPublicVapidKeyRoute
+  '/api/public/hooks/prayer-tick': typeof ApiPublicHooksPrayerTickRoute
+  '/api/public/hooks/send-scheduled': typeof ApiPublicHooksSendScheduledRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/completion': typeof CompletionRoute
+  '/contact': typeof ContactRoute
+  '/dhikr': typeof DhikrRoute
+  '/family': typeof FamilyRoute
+  '/goals': typeof GoalsRouteWithChildren
+  '/landing': typeof LandingRoute
+  '/prayer': typeof PrayerRoute
+  '/premium': typeof PremiumRoute
+  '/profile': typeof ProfileRoute
+  '/reading': typeof ReadingRoute
+  '/settings': typeof SettingsRoute
+  '/stats': typeof StatsRoute
+  '/themes': typeof ThemesRoute
+  '/admin/advanced': typeof AdminAdvancedRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/content': typeof AdminContentRoute
+  '/admin/editor': typeof AdminEditorRoute
+  '/admin/engine': typeof AdminEngineRoute
+  '/admin/gamification': typeof AdminGamificationRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/premium': typeof AdminPremiumRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/support': typeof AdminSupportRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/goals/setup': typeof GoalsSetupRoute
+  '/admin': typeof AdminIndexRoute
+  '/api/admin/send-push': typeof ApiAdminSendPushRoute
+  '/api/public/vapid-key': typeof ApiPublicVapidKeyRoute
+  '/api/public/hooks/prayer-tick': typeof ApiPublicHooksPrayerTickRoute
+  '/api/public/hooks/send-scheduled': typeof ApiPublicHooksSendScheduledRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/completion': typeof CompletionRoute
+  '/contact': typeof ContactRoute
+  '/dhikr': typeof DhikrRoute
+  '/family': typeof FamilyRoute
+  '/goals': typeof GoalsRouteWithChildren
+  '/landing': typeof LandingRoute
+  '/prayer': typeof PrayerRoute
+  '/premium': typeof PremiumRoute
+  '/profile': typeof ProfileRoute
+  '/reading': typeof ReadingRoute
+  '/settings': typeof SettingsRoute
+  '/stats': typeof StatsRoute
+  '/themes': typeof ThemesRoute
+  '/admin/advanced': typeof AdminAdvancedRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/content': typeof AdminContentRoute
+  '/admin/editor': typeof AdminEditorRoute
+  '/admin/engine': typeof AdminEngineRoute
+  '/admin/gamification': typeof AdminGamificationRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/premium': typeof AdminPremiumRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/support': typeof AdminSupportRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/goals/setup': typeof GoalsSetupRoute
+  '/admin/': typeof AdminIndexRoute
+  '/api/admin/send-push': typeof ApiAdminSendPushRoute
+  '/api/public/vapid-key': typeof ApiPublicVapidKeyRoute
+  '/api/public/hooks/prayer-tick': typeof ApiPublicHooksPrayerTickRoute
+  '/api/public/hooks/send-scheduled': typeof ApiPublicHooksSendScheduledRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/completion'
+    | '/contact'
+    | '/dhikr'
+    | '/family'
+    | '/goals'
+    | '/landing'
+    | '/prayer'
+    | '/premium'
+    | '/profile'
+    | '/reading'
+    | '/settings'
+    | '/stats'
+    | '/themes'
+    | '/admin/advanced'
+    | '/admin/analytics'
+    | '/admin/content'
+    | '/admin/editor'
+    | '/admin/engine'
+    | '/admin/gamification'
+    | '/admin/notifications'
+    | '/admin/premium'
+    | '/admin/settings'
+    | '/admin/support'
+    | '/admin/users'
+    | '/goals/setup'
+    | '/admin/'
+    | '/api/admin/send-push'
+    | '/api/public/vapid-key'
+    | '/api/public/hooks/prayer-tick'
+    | '/api/public/hooks/send-scheduled'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/completion'
+    | '/contact'
+    | '/dhikr'
+    | '/family'
+    | '/goals'
+    | '/landing'
+    | '/prayer'
+    | '/premium'
+    | '/profile'
+    | '/reading'
+    | '/settings'
+    | '/stats'
+    | '/themes'
+    | '/admin/advanced'
+    | '/admin/analytics'
+    | '/admin/content'
+    | '/admin/editor'
+    | '/admin/engine'
+    | '/admin/gamification'
+    | '/admin/notifications'
+    | '/admin/premium'
+    | '/admin/settings'
+    | '/admin/support'
+    | '/admin/users'
+    | '/goals/setup'
+    | '/admin'
+    | '/api/admin/send-push'
+    | '/api/public/vapid-key'
+    | '/api/public/hooks/prayer-tick'
+    | '/api/public/hooks/send-scheduled'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/completion'
+    | '/contact'
+    | '/dhikr'
+    | '/family'
+    | '/goals'
+    | '/landing'
+    | '/prayer'
+    | '/premium'
+    | '/profile'
+    | '/reading'
+    | '/settings'
+    | '/stats'
+    | '/themes'
+    | '/admin/advanced'
+    | '/admin/analytics'
+    | '/admin/content'
+    | '/admin/editor'
+    | '/admin/engine'
+    | '/admin/gamification'
+    | '/admin/notifications'
+    | '/admin/premium'
+    | '/admin/settings'
+    | '/admin/support'
+    | '/admin/users'
+    | '/goals/setup'
+    | '/admin/'
+    | '/api/admin/send-push'
+    | '/api/public/vapid-key'
+    | '/api/public/hooks/prayer-tick'
+    | '/api/public/hooks/send-scheduled'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  CompletionRoute: typeof CompletionRoute
+  ContactRoute: typeof ContactRoute
+  DhikrRoute: typeof DhikrRoute
+  FamilyRoute: typeof FamilyRoute
+  GoalsRoute: typeof GoalsRouteWithChildren
+  LandingRoute: typeof LandingRoute
+  PrayerRoute: typeof PrayerRoute
+  PremiumRoute: typeof PremiumRoute
+  ProfileRoute: typeof ProfileRoute
+  ReadingRoute: typeof ReadingRoute
+  SettingsRoute: typeof SettingsRoute
+  StatsRoute: typeof StatsRoute
+  ThemesRoute: typeof ThemesRoute
+  ApiAdminSendPushRoute: typeof ApiAdminSendPushRoute
+  ApiPublicVapidKeyRoute: typeof ApiPublicVapidKeyRoute
+  ApiPublicHooksPrayerTickRoute: typeof ApiPublicHooksPrayerTickRoute
+  ApiPublicHooksSendScheduledRoute: typeof ApiPublicHooksSendScheduledRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/themes': {
+      id: '/themes'
+      path: '/themes'
+      fullPath: '/themes'
+      preLoaderRoute: typeof ThemesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stats': {
+      id: '/stats'
+      path: '/stats'
+      fullPath: '/stats'
+      preLoaderRoute: typeof StatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reading': {
+      id: '/reading'
+      path: '/reading'
+      fullPath: '/reading'
+      preLoaderRoute: typeof ReadingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/premium': {
+      id: '/premium'
+      path: '/premium'
+      fullPath: '/premium'
+      preLoaderRoute: typeof PremiumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prayer': {
+      id: '/prayer'
+      path: '/prayer'
+      fullPath: '/prayer'
+      preLoaderRoute: typeof PrayerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/landing': {
+      id: '/landing'
+      path: '/landing'
+      fullPath: '/landing'
+      preLoaderRoute: typeof LandingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/goals': {
+      id: '/goals'
+      path: '/goals'
+      fullPath: '/goals'
+      preLoaderRoute: typeof GoalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/family': {
+      id: '/family'
+      path: '/family'
+      fullPath: '/family'
+      preLoaderRoute: typeof FamilyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dhikr': {
+      id: '/dhikr'
+      path: '/dhikr'
+      fullPath: '/dhikr'
+      preLoaderRoute: typeof DhikrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/completion': {
+      id: '/completion'
+      path: '/completion'
+      fullPath: '/completion'
+      preLoaderRoute: typeof CompletionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +560,192 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/goals/setup': {
+      id: '/goals/setup'
+      path: '/setup'
+      fullPath: '/goals/setup'
+      preLoaderRoute: typeof GoalsSetupRouteImport
+      parentRoute: typeof GoalsRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/support': {
+      id: '/admin/support'
+      path: '/support'
+      fullPath: '/admin/support'
+      preLoaderRoute: typeof AdminSupportRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/premium': {
+      id: '/admin/premium'
+      path: '/premium'
+      fullPath: '/admin/premium'
+      preLoaderRoute: typeof AdminPremiumRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/notifications': {
+      id: '/admin/notifications'
+      path: '/notifications'
+      fullPath: '/admin/notifications'
+      preLoaderRoute: typeof AdminNotificationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/gamification': {
+      id: '/admin/gamification'
+      path: '/gamification'
+      fullPath: '/admin/gamification'
+      preLoaderRoute: typeof AdminGamificationRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/engine': {
+      id: '/admin/engine'
+      path: '/engine'
+      fullPath: '/admin/engine'
+      preLoaderRoute: typeof AdminEngineRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/editor': {
+      id: '/admin/editor'
+      path: '/editor'
+      fullPath: '/admin/editor'
+      preLoaderRoute: typeof AdminEditorRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/content': {
+      id: '/admin/content'
+      path: '/content'
+      fullPath: '/admin/content'
+      preLoaderRoute: typeof AdminContentRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/analytics': {
+      id: '/admin/analytics'
+      path: '/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAnalyticsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/advanced': {
+      id: '/admin/advanced'
+      path: '/advanced'
+      fullPath: '/admin/advanced'
+      preLoaderRoute: typeof AdminAdvancedRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/api/public/vapid-key': {
+      id: '/api/public/vapid-key'
+      path: '/api/public/vapid-key'
+      fullPath: '/api/public/vapid-key'
+      preLoaderRoute: typeof ApiPublicVapidKeyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/send-push': {
+      id: '/api/admin/send-push'
+      path: '/api/admin/send-push'
+      fullPath: '/api/admin/send-push'
+      preLoaderRoute: typeof ApiAdminSendPushRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/send-scheduled': {
+      id: '/api/public/hooks/send-scheduled'
+      path: '/api/public/hooks/send-scheduled'
+      fullPath: '/api/public/hooks/send-scheduled'
+      preLoaderRoute: typeof ApiPublicHooksSendScheduledRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/prayer-tick': {
+      id: '/api/public/hooks/prayer-tick'
+      path: '/api/public/hooks/prayer-tick'
+      fullPath: '/api/public/hooks/prayer-tick'
+      preLoaderRoute: typeof ApiPublicHooksPrayerTickRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminAdvancedRoute: typeof AdminAdvancedRoute
+  AdminAnalyticsRoute: typeof AdminAnalyticsRoute
+  AdminContentRoute: typeof AdminContentRoute
+  AdminEditorRoute: typeof AdminEditorRoute
+  AdminEngineRoute: typeof AdminEngineRoute
+  AdminGamificationRoute: typeof AdminGamificationRoute
+  AdminNotificationsRoute: typeof AdminNotificationsRoute
+  AdminPremiumRoute: typeof AdminPremiumRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminSupportRoute: typeof AdminSupportRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAdvancedRoute: AdminAdvancedRoute,
+  AdminAnalyticsRoute: AdminAnalyticsRoute,
+  AdminContentRoute: AdminContentRoute,
+  AdminEditorRoute: AdminEditorRoute,
+  AdminEngineRoute: AdminEngineRoute,
+  AdminGamificationRoute: AdminGamificationRoute,
+  AdminNotificationsRoute: AdminNotificationsRoute,
+  AdminPremiumRoute: AdminPremiumRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminSupportRoute: AdminSupportRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface GoalsRouteChildren {
+  GoalsSetupRoute: typeof GoalsSetupRoute
+}
+
+const GoalsRouteChildren: GoalsRouteChildren = {
+  GoalsSetupRoute: GoalsSetupRoute,
+}
+
+const GoalsRouteWithChildren = GoalsRoute._addFileChildren(GoalsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  AuthRoute: AuthRoute,
+  CompletionRoute: CompletionRoute,
+  ContactRoute: ContactRoute,
+  DhikrRoute: DhikrRoute,
+  FamilyRoute: FamilyRoute,
+  GoalsRoute: GoalsRouteWithChildren,
+  LandingRoute: LandingRoute,
+  PrayerRoute: PrayerRoute,
+  PremiumRoute: PremiumRoute,
+  ProfileRoute: ProfileRoute,
+  ReadingRoute: ReadingRoute,
+  SettingsRoute: SettingsRoute,
+  StatsRoute: StatsRoute,
+  ThemesRoute: ThemesRoute,
+  ApiAdminSendPushRoute: ApiAdminSendPushRoute,
+  ApiPublicVapidKeyRoute: ApiPublicVapidKeyRoute,
+  ApiPublicHooksPrayerTickRoute: ApiPublicHooksPrayerTickRoute,
+  ApiPublicHooksSendScheduledRoute: ApiPublicHooksSendScheduledRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

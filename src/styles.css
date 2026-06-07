@@ -1,21 +1,23 @@
 @import "tailwindcss" source(none);
 @source "../src";
+@font-face {
+  font-family: "XB Yas";
+  src: url("/fonts/XB-YasBd.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * Dawm — Multi-theme design system.
+ * Each theme is selected via [data-theme="..."] on <html>.
+ * Fonts:
+ *  - Manrope  → كل التطبيق (UI / body / headings)
+ *  - Plus Jakarta Sans → شعار "داوم" فقط، لا يُستخدم في أي مكان آخر
+ *  - Amiri / Noto Naskh → النصوص القرآنية
  */
 
 @theme inline {
@@ -25,7 +27,7 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -45,100 +47,801 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-ring-offset-background: var(--background);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-display: "Manrope", system-ui, sans-serif;
+  --font-logo: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Manrope", system-ui, sans-serif;
+  --font-quran: "Amiri", "Noto Naskh Arabic", serif;
 }
 
-:root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+/* =========================================================
+   الليل (Night) — أسود + ذهبي خالص (بدون أخضر)
+   ========================================================= */
+:root,
+[data-theme="night"] {
+  --radius: 1rem;
+  --background: oklch(0.16 0.004 90);
+  --foreground: oklch(0.97 0.005 90);
+  --card: oklch(0.22 0.005 90);
+  --card-foreground: oklch(0.97 0.005 90);
+  --popover: oklch(0.22 0.005 90);
+  --popover-foreground: oklch(0.97 0.005 90);
+  /* ذهبي رئيسي #C5A059 */
+  --primary: oklch(0.74 0.10 80);
+  --primary-foreground: oklch(0.14 0.004 90);
+  --secondary: oklch(0.26 0.005 90);
+  --secondary-foreground: oklch(0.97 0.005 90);
+  --muted: oklch(0.24 0.005 90);
+  --muted-foreground: oklch(0.70 0.008 90);
+  /* لمسة ذهبية فاتحة بدل الأخضر */
+  --accent: oklch(0.82 0.11 85);
+  --accent-foreground: oklch(0.14 0.004 90);
+  --destructive: oklch(0.62 0.22 27);
+  --destructive-foreground: oklch(0.97 0.005 90);
+  --border: oklch(0.30 0.005 90);
+  --input: oklch(0.26 0.005 90);
+  --ring: oklch(0.74 0.10 80);
+
+  --gradient-primary: linear-gradient(135deg, oklch(0.82 0.11 85), oklch(0.62 0.10 75));
+  --gradient-accent: linear-gradient(135deg, oklch(0.86 0.11 88), oklch(0.66 0.11 78));
+  --gradient-surface: linear-gradient(180deg, oklch(0.22 0.005 90), oklch(0.16 0.004 90));
+  --gradient-bg: radial-gradient(60% 40% at 50% 0%, color-mix(in oklab, oklch(0.74 0.10 80) 8%, transparent) 0%, transparent 70%),
+                 linear-gradient(180deg, oklch(0.17 0.004 90), oklch(0.14 0.004 90));
+  --shadow-elegant: 0 8px 30px -8px oklch(0 0 0 / 0.55);
+  --shadow-glow: 0 10px 40px -12px color-mix(in oklab, var(--primary) 45%, transparent);
+
+  /* Mushaf reading surface (theme-adaptive) */
+  --mushaf-paper: linear-gradient(180deg, #1b1d24 0%, #14161c 100%);
+  --mushaf-paper-solid: #16181f;
+  --mushaf-ink: #f3e7c9;
+  --mushaf-ornament: #c5a059;
+  --mushaf-frame: #8a6a1f;
+  --mushaf-gold-soft: #e5c46a;
+  --mushaf-surface: rgba(40, 33, 18, 0.45);
+  --mushaf-surface-strong: rgba(60, 48, 22, 0.65);
+  --mushaf-line-bg: rgba(229, 196, 106, 0.14);
+  --mushaf-glow: 0 0 22px rgba(229, 196, 106, 0.25);
+  --mushaf-vignette: inset 0 0 80px rgba(0,0,0,0.55), 0 20px 40px -20px rgba(0,0,0,0.7);
+}
+
+/* =========================================================
+   النهار (Day) — أبيض + أخضر زمردي
+   ========================================================= */
+[data-theme="day"] {
+  --radius: 1rem;
+  --background: oklch(0.985 0.003 160);
+  --foreground: oklch(0.18 0.02 160);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --card-foreground: oklch(0.18 0.02 160);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --popover-foreground: oklch(0.18 0.02 160);
+  --primary: oklch(0.45 0.12 160);
+  --primary-foreground: oklch(0.99 0.005 160);
+  --secondary: oklch(0.95 0.01 160);
+  --secondary-foreground: oklch(0.18 0.02 160);
+  --muted: oklch(0.94 0.008 160);
+  --muted-foreground: oklch(0.45 0.02 160);
+  --accent: oklch(0.50 0.13 160);
+  --accent-foreground: oklch(0.99 0.005 160);
+  --destructive: oklch(0.6 0.22 27);
+  --destructive-foreground: oklch(0.99 0.005 160);
+  --border: oklch(0.9 0.008 160);
+  --input: oklch(0.93 0.008 160);
+  --ring: oklch(0.45 0.12 160);
+  --gradient-primary: linear-gradient(135deg, oklch(0.55 0.13 160), oklch(0.40 0.12 160));
+  --gradient-accent: linear-gradient(135deg, oklch(0.55 0.13 160), oklch(0.40 0.12 160));
+  --gradient-surface: linear-gradient(180deg, oklch(0.99 0.003 160), oklch(0.97 0.005 160));
+  --gradient-bg: linear-gradient(180deg, oklch(0.99 0.003 160), oklch(0.97 0.005 160));
+  --shadow-elegant: 0 8px 30px -10px oklch(0.4 0.05 160 / 0.18);
+  --shadow-glow: 0 10px 40px -12px color-mix(in oklab, var(--primary) 30%, transparent);
+
+  --mushaf-paper: linear-gradient(180deg, #fbf6e9 0%, #f3e7c9 100%);
+  --mushaf-paper-solid: #f7efd9;
+  --mushaf-ink: #1a1308;
+  --mushaf-ornament: #8a6a1f;
+  --mushaf-frame: #b08a3a;
+  --mushaf-gold-soft: #d6ad4c;
+  --mushaf-surface: rgba(245, 233, 203, 0.55);
+  --mushaf-surface-strong: rgba(232, 214, 168, 0.85);
+  --mushaf-line-bg: rgba(212, 175, 110, 0.22);
+  --mushaf-glow: 0 0 18px rgba(176, 138, 58, 0.22);
+  --mushaf-vignette: inset 0 0 60px rgba(120, 80, 30, 0.18), 0 20px 40px -20px rgba(60, 40, 10, 0.35);
 }
 
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+/* =========================================================
+   الورقي (Paper / Sepia) — بيج + بُنّي
+   ========================================================= */
+[data-theme="paper"] {
+  --radius: 1rem;
+  --background: oklch(0.92 0.035 80);
+  --foreground: oklch(0.30 0.04 60);
+  --card: oklch(0.88 0.04 78);
+  --card-foreground: oklch(0.30 0.04 60);
+  --popover: oklch(0.88 0.04 78);
+  --popover-foreground: oklch(0.30 0.04 60);
+  --primary: oklch(0.45 0.07 55);
+  --primary-foreground: oklch(0.96 0.02 80);
+  --secondary: oklch(0.85 0.04 78);
+  --secondary-foreground: oklch(0.30 0.04 60);
+  --muted: oklch(0.86 0.035 78);
+  --muted-foreground: oklch(0.48 0.05 60);
+  --accent: oklch(0.50 0.08 55);
+  --accent-foreground: oklch(0.96 0.02 80);
+  --destructive: oklch(0.55 0.2 27);
+  --destructive-foreground: oklch(0.96 0.02 80);
+  --border: oklch(0.78 0.04 70);
+  --input: oklch(0.82 0.04 75);
+  --ring: oklch(0.45 0.07 55);
+  --gradient-primary: linear-gradient(135deg, oklch(0.55 0.08 60), oklch(0.40 0.07 50));
+  --gradient-accent: linear-gradient(135deg, oklch(0.55 0.08 60), oklch(0.40 0.07 50));
+  --gradient-surface: linear-gradient(180deg, oklch(0.92 0.035 80), oklch(0.86 0.04 78));
+  --gradient-bg: linear-gradient(180deg, oklch(0.92 0.035 80), oklch(0.88 0.04 78));
+  --shadow-elegant: 0 8px 30px -10px oklch(0.3 0.05 50 / 0.20);
+  --shadow-glow: 0 10px 40px -12px color-mix(in oklab, var(--primary) 25%, transparent);
+
+  --mushaf-paper: linear-gradient(180deg, #f5e9cb 0%, #ecdcb3 100%);
+  --mushaf-paper-solid: #f1e2bf;
+  --mushaf-ink: #2a1d05;
+  --mushaf-ornament: #8a6a1f;
+  --mushaf-frame: #b08a3a;
+  --mushaf-gold-soft: #d6ad4c;
+  --mushaf-surface: rgba(245, 233, 203, 0.55);
+  --mushaf-surface-strong: rgba(232, 214, 168, 0.85);
+  --mushaf-line-bg: rgba(212, 175, 110, 0.22);
+  --mushaf-glow: 0 0 18px rgba(176, 138, 58, 0.25);
+  --mushaf-vignette: inset 0 0 70px rgba(120, 80, 30, 0.28), 0 20px 40px -20px rgba(60, 40, 10, 0.45);
+}
+
+/* =========================================================
+   تالية (Talia) — وردي ناعم
+   ========================================================= */
+[data-theme="talia"] {
+  --radius: 1rem;
+  --background: oklch(0.97 0.025 10);
+  --foreground: oklch(0.30 0.10 0);
+  --card: oklch(0.99 0.012 10);
+  --card-foreground: oklch(0.30 0.10 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.30 0.10 0);
+  --primary: oklch(0.58 0.20 0);
+  --primary-foreground: oklch(0.99 0.005 0);
+  --secondary: oklch(0.94 0.03 10);
+  --secondary-foreground: oklch(0.30 0.10 0);
+  --muted: oklch(0.95 0.025 10);
+  --muted-foreground: oklch(0.50 0.08 5);
+  --accent: oklch(0.62 0.20 0);
+  --accent-foreground: oklch(0.99 0.005 0);
+  --destructive: oklch(0.6 0.22 27);
+  --destructive-foreground: oklch(0.99 0.005 0);
+  --border: oklch(0.90 0.03 10);
+  --input: oklch(0.93 0.03 10);
+  --ring: oklch(0.58 0.20 0);
+  --gradient-primary: linear-gradient(135deg, oklch(0.65 0.20 0), oklch(0.50 0.20 0));
+  --gradient-accent: linear-gradient(135deg, oklch(0.65 0.20 0), oklch(0.50 0.20 0));
+  --gradient-surface: linear-gradient(180deg, oklch(0.99 0.012 10), oklch(0.96 0.025 10));
+  --gradient-bg: linear-gradient(180deg, oklch(0.98 0.018 10), oklch(0.96 0.025 10));
+  --shadow-elegant: 0 8px 30px -10px oklch(0.5 0.15 0 / 0.18);
+  --shadow-glow: 0 10px 40px -12px color-mix(in oklab, var(--primary) 30%, transparent);
+
+  --mushaf-paper: linear-gradient(180deg, #fff5f8 0%, #fde4ec 100%);
+  --mushaf-paper-solid: #fdebf1;
+  --mushaf-ink: #3a1623;
+  --mushaf-ornament: #c2477a;
+  --mushaf-frame: #d6336c;
+  --mushaf-gold-soft: #e879a0;
+  --mushaf-surface: rgba(255, 230, 238, 0.55);
+  --mushaf-surface-strong: rgba(248, 200, 216, 0.85);
+  --mushaf-line-bg: rgba(232, 121, 160, 0.18);
+  --mushaf-glow: 0 0 18px rgba(214, 51, 108, 0.20);
+  --mushaf-vignette: inset 0 0 60px rgba(214, 51, 108, 0.12), 0 20px 40px -20px rgba(180, 30, 80, 0.30);
+}
+
+/* =========================================================
+   شهر رمضان — أخضر داكن + ذهبي
+   ========================================================= */
+[data-theme="ramadan"] {
+  --radius: 1rem;
+  --background: oklch(0.20 0.05 160);
+  --foreground: oklch(0.96 0.03 90);
+  --card: oklch(0.25 0.05 160);
+  --card-foreground: oklch(0.96 0.03 90);
+  --popover: oklch(0.25 0.05 160);
+  --popover-foreground: oklch(0.96 0.03 90);
+  --primary: oklch(0.82 0.14 88);
+  --primary-foreground: oklch(0.18 0.04 160);
+  --secondary: oklch(0.30 0.05 160);
+  --secondary-foreground: oklch(0.96 0.03 90);
+  --muted: oklch(0.28 0.05 160);
+  --muted-foreground: oklch(0.78 0.04 90);
+  --accent: oklch(0.86 0.13 88);
+  --accent-foreground: oklch(0.18 0.04 160);
+  --destructive: oklch(0.62 0.22 27);
+  --destructive-foreground: oklch(0.96 0.02 90);
+  --border: oklch(0.32 0.05 160);
+  --input: oklch(0.30 0.05 160);
+  --ring: oklch(0.82 0.14 88);
+  --gradient-primary: linear-gradient(135deg, oklch(0.88 0.13 90), oklch(0.66 0.14 78));
+  --gradient-accent: linear-gradient(135deg, oklch(0.88 0.13 90), oklch(0.66 0.14 78));
+  --gradient-surface: linear-gradient(180deg, oklch(0.25 0.05 160), oklch(0.18 0.04 160));
+  --gradient-bg: linear-gradient(180deg, oklch(0.22 0.05 160), oklch(0.18 0.04 160));
+  --shadow-elegant: 0 8px 30px -8px oklch(0 0 0 / 0.5);
+  --shadow-glow: 0 10px 40px -12px color-mix(in oklab, var(--primary) 35%, transparent);
+
+  --mushaf-paper: linear-gradient(180deg, #143027 0%, #0b2018 100%);
+  --mushaf-paper-solid: #102a21;
+  --mushaf-ink: #f0ead2;
+  --mushaf-ornament: #e5c46a;
+  --mushaf-frame: #c9a84c;
+  --mushaf-gold-soft: #f5d98c;
+  --mushaf-surface: rgba(20, 48, 39, 0.55);
+  --mushaf-surface-strong: rgba(28, 60, 50, 0.85);
+  --mushaf-line-bg: rgba(229, 196, 106, 0.16);
+  --mushaf-glow: 0 0 22px rgba(229, 196, 106, 0.30);
+  --mushaf-vignette: inset 0 0 80px rgba(0,0,0,0.55), 0 20px 40px -20px rgba(0,0,0,0.7);
+}
+
+/* =========================================================
+   الجمعة — داكن + برتقالي دافئ
+   ========================================================= */
+[data-theme="friday"] {
+  --radius: 1rem;
+  --background: oklch(0.16 0.005 60);
+  --foreground: oklch(0.96 0.02 70);
+  --card: oklch(0.22 0.008 60);
+  --card-foreground: oklch(0.96 0.02 70);
+  --popover: oklch(0.22 0.008 60);
+  --popover-foreground: oklch(0.96 0.02 70);
+  --primary: oklch(0.72 0.18 55);
+  --primary-foreground: oklch(0.16 0.005 60);
+  --secondary: oklch(0.27 0.012 60);
+  --secondary-foreground: oklch(0.96 0.02 70);
+  --muted: oklch(0.25 0.010 60);
+  --muted-foreground: oklch(0.74 0.03 70);
+  --accent: oklch(0.78 0.16 55);
+  --accent-foreground: oklch(0.16 0.005 60);
+  --destructive: oklch(0.62 0.22 27);
+  --destructive-foreground: oklch(0.96 0.02 70);
+  --border: oklch(0.30 0.015 60);
+  --input: oklch(0.27 0.012 60);
+  --ring: oklch(0.72 0.18 55);
+  --gradient-primary: linear-gradient(135deg, oklch(0.80 0.17 60), oklch(0.60 0.18 45));
+  --gradient-accent: linear-gradient(135deg, oklch(0.80 0.17 60), oklch(0.60 0.18 45));
+  --gradient-surface: linear-gradient(180deg, oklch(0.22 0.008 60), oklch(0.16 0.005 60));
+  --gradient-bg: linear-gradient(180deg, oklch(0.18 0.006 60), oklch(0.14 0.004 60));
+  --shadow-elegant: 0 8px 30px -8px oklch(0 0 0 / 0.55);
+  --shadow-glow: 0 10px 40px -12px color-mix(in oklab, var(--primary) 35%, transparent);
+
+  --mushaf-paper: linear-gradient(180deg, #1f1d1a 0%, #14120f 100%);
+  --mushaf-paper-solid: #1a1814;
+  --mushaf-ink: #f4e9d6;
+  --mushaf-ornament: #ff8a3d;
+  --mushaf-frame: #c46a2a;
+  --mushaf-gold-soft: #ffb36b;
+  --mushaf-surface: rgba(60, 36, 18, 0.55);
+  --mushaf-surface-strong: rgba(80, 50, 24, 0.85);
+  --mushaf-line-bg: rgba(255, 138, 61, 0.16);
+  --mushaf-glow: 0 0 22px rgba(255, 138, 61, 0.30);
+  --mushaf-vignette: inset 0 0 80px rgba(0,0,0,0.55), 0 20px 40px -20px rgba(0,0,0,0.7);
 }
 
 @layer base {
   * {
     border-color: var(--color-border);
   }
-
+  html {
+    font-family: var(--font-body);
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-body);
   }
+  /* utility classes */
+  .font-display {
+    font-family: var(--font-body); /* نفس Manrope */
+  }
+  .font-logo {
+    font-family: var(--font-logo); /* Plus Jakarta Sans — للشعار فقط */
+    letter-spacing: 0.01em;
+  }
+  .font-quran {
+    font-family: var(--font-quran);
+  }
+}
+
+/* =========================================================
+   Mushaf — theme-adaptive paper experience
+   All colors come from --mushaf-* tokens defined per theme.
+   ========================================================= */
+.mushaf-paper {
+  background: var(--mushaf-paper, linear-gradient(180deg, #f5e9cb 0%, #ecdcb3 100%));
+  background-color: var(--mushaf-paper-solid, #f3e7c9);
+  color: var(--mushaf-ink, #1a1308);
+  transition: background-color .5s ease, color .5s ease;
+}
+/* Paper mushaf mode: always cream background regardless of active theme */
+.mushaf-paper-mode {
+  background: linear-gradient(180deg, #fbf6e9 0%, #f3e7c9 100%) !important;
+  background-color: #f7efd9 !important;
+  color: #1a1308 !important;
+}
+.mushaf-vignette {
+  box-shadow: var(--mushaf-vignette,
+    inset 0 0 60px rgba(120, 80, 30, 0.25),
+    0 20px 40px -20px rgba(60, 40, 10, 0.5));
+  transition: box-shadow .5s ease;
+}
+.mushaf-gold { color: var(--mushaf-ornament, #8a6a1f); transition: color .4s ease; }
+.mushaf-ink  { color: var(--mushaf-ink, #1a1308); transition: color .4s ease; }
+
+.mushaf-frame {
+  position: relative;
+  border: 2px solid var(--mushaf-frame);
+  outline: 1px solid var(--mushaf-frame);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+.mushaf-frame::before,
+.mushaf-frame::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  height: 10px;
+  background-image: repeating-linear-gradient(90deg,
+    var(--mushaf-frame) 0 6px, transparent 6px 12px);
+  opacity: 0.7;
+}
+.mushaf-frame::before { top: -14px; }
+.mushaf-frame::after  { bottom: -14px; }
+
+/* Vertical ornamental side borders — vine-like motif (uses mask so it follows theme color) */
+.mushaf-side-borders { position: relative; }
+.mushaf-side-borders::before,
+.mushaf-side-borders::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  width: 22px;
+  background-color: var(--mushaf-ornament);
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='44' viewBox='0 0 22 44'><g fill='none' stroke='black' stroke-width='1.1'><path d='M11 0 V44'/><path d='M3 6 Q11 10 19 6 Q11 14 3 22 Q11 30 19 22 Q11 38 3 44'/><circle cx='11' cy='6' r='1.6' fill='black' stroke='none'/><circle cx='11' cy='22' r='2' fill='black' stroke='none'/><circle cx='11' cy='38' r='1.6' fill='black' stroke='none'/></g></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='44' viewBox='0 0 22 44'><g fill='none' stroke='black' stroke-width='1.1'><path d='M11 0 V44'/><path d='M3 6 Q11 10 19 6 Q11 14 3 22 Q11 30 19 22 Q11 38 3 44'/><circle cx='11' cy='6' r='1.6' fill='black' stroke='none'/><circle cx='11' cy='22' r='2' fill='black' stroke='none'/><circle cx='11' cy='38' r='1.6' fill='black' stroke='none'/></g></svg>");
+  -webkit-mask-repeat: repeat-y;
+  mask-repeat: repeat-y;
+  -webkit-mask-size: 22px 44px;
+  mask-size: 22px 44px;
+  opacity: 0.85;
+  pointer-events: none;
+  transition: background-color .5s ease;
+}
+.mushaf-side-borders::before { right: 0; }
+.mushaf-side-borders::after  { left:  0; }
+
+.mushaf-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 18px;
+  background: var(--mushaf-surface-strong);
+  border: 1px solid var(--mushaf-frame);
+  border-radius: 4px;
+  color: var(--mushaf-ink);
+  font-family: var(--font-quran);
+  box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--mushaf-frame) 25%, transparent);
+}
+
+.mushaf-iconbtn {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mushaf-surface-strong);
+  border: 1px solid var(--mushaf-frame);
+  border-radius: 8px;
+  color: var(--mushaf-ink);
+  box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--mushaf-frame) 18%, transparent);
+  transition: background .25s ease, color .25s ease, transform .15s ease;
+}
+.mushaf-iconbtn:hover { background: color-mix(in oklab, var(--mushaf-gold-soft) 35%, var(--mushaf-surface-strong)); }
+
+.mushaf-page-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  background: var(--mushaf-surface-strong);
+  border: 1px solid var(--mushaf-frame);
+  border-radius: 999px;
+  color: var(--mushaf-ink);
+  box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--mushaf-frame) 18%, transparent), var(--mushaf-glow);
+  transition: background .4s ease, color .4s ease, box-shadow .4s ease;
+}
+
+.mushaf-ayah-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6em;
+  height: 1.6em;
+  margin: 0 0.15em;
+  vertical-align: middle;
+  background: radial-gradient(circle at 35% 30%,
+    color-mix(in oklab, var(--mushaf-gold-soft) 90%, white) 0%,
+    var(--mushaf-gold-soft) 55%,
+    var(--mushaf-ornament) 100%);
+  color: var(--mushaf-ink);
+  border-radius: 50%;
+  font-size: 0.55em;
+  font-weight: 700;
+  font-family: var(--font-quran);
+  box-shadow: 0 0 0 1px var(--mushaf-ornament), inset 0 0 4px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.15s, background .4s ease, color .4s ease;
+}
+.mushaf-ayah-marker:hover { transform: scale(1.12); }
+
+.mushaf-surah-banner {
+  position: relative;
+  margin: 4px 26px 10px;
+}
+.mushaf-surah-banner::before,
+.mushaf-surah-banner::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  height: 28px;
+  transform: translateY(-50%);
+  background-color: var(--mushaf-ornament);
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='28' viewBox='0 0 24 28'><path d='M0 14 L12 0 L24 14 L12 28 Z' fill='black'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='28' viewBox='0 0 24 28'><path d='M0 14 L12 0 L24 14 L12 28 Z' fill='black'/></svg>");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  transition: background-color .5s ease;
+}
+.mushaf-surah-banner::before { right: -22px; }
+.mushaf-surah-banner::after  { left:  -22px; }
+.mushaf-surah-banner-inner {
+  background: linear-gradient(180deg,
+    color-mix(in oklab, var(--mushaf-gold-soft) 80%, white) 0%,
+    var(--mushaf-gold-soft) 100%);
+  border: 1.5px solid var(--mushaf-ornament);
+  border-radius: 4px;
+  padding: 10px 18px;
+  text-align: center;
+  color: var(--mushaf-ink);
+  font-family: var(--font-quran);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,0.4),
+    inset 0 0 0 3px color-mix(in oklab, var(--mushaf-frame) 55%, transparent),
+    var(--mushaf-glow);
+  transition: background .5s ease, color .5s ease, box-shadow .5s ease;
+}
+
+.mushaf-word { cursor: pointer; transition: color 0.15s, background .15s; }
+.mushaf-word:hover  { color: var(--mushaf-ornament); }
+.mushaf-word.playing {
+  color: var(--mushaf-ink);
+  background: var(--mushaf-line-bg);
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--mushaf-ornament) 35%, transparent);
+}
+
+.mushaf-page-fit {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.mushaf-line {
+  font-family: var(--font-quran);
+  color: var(--mushaf-ink);
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  white-space: nowrap;
+  direction: rtl;
+  unicode-bidi: isolate;
+  line-height: 1.85;
+  font-size: clamp(14px, 4.2vw, 22px);
+  margin: 0;
+  transition: color .5s ease, font-size .2s ease;
+}
+.mushaf-line.is-center { justify-content: center; gap: 0.25em; }
+.mushaf-line > .mushaf-word,
+.mushaf-line > .mushaf-ayah-marker { white-space: nowrap; flex: 0 0 auto; }
+
+@media (max-width: 380px) {
+  .mushaf-line { font-size: clamp(13px, 3.9vw, 18px); line-height: 1.75; }
+}
+
+/* When user enlarges beyond fit, allow wrapping so words remain visible. */
+[data-user-scale="up"] .mushaf-line {
+  flex-wrap: wrap;
+  white-space: normal;
+  justify-content: center;
+  gap: 0.2em;
+}
+
+/* =========================================================
+   UX micro-interactions — fade, slide, stagger, press, glow
+   ========================================================= */
+@keyframes dawm-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes dawm-slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes dawm-stagger-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes dawm-bounce-icon {
+  0%   { transform: translateY(0) scale(1); }
+  35%  { transform: translateY(-3px) scale(1.18); }
+  70%  { transform: translateY(0) scale(0.96); }
+  100% { transform: translateY(0) scale(1); }
+}
+@keyframes dawm-points-glow {
+  0%   { box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary) 60%, transparent); }
+  60%  { box-shadow: 0 0 0 10px color-mix(in oklab, var(--primary) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+.dawm-fade-in   { animation: dawm-fade-in   .28s ease-out both; }
+.dawm-slide-up  { animation: dawm-slide-up  .32s cubic-bezier(.22,1,.36,1) both; }
+.dawm-stagger > * {
+  animation: dawm-stagger-in .28s ease-out both;
+}
+.dawm-stagger > *:nth-child(1)  { animation-delay: .02s; }
+.dawm-stagger > *:nth-child(2)  { animation-delay: .04s; }
+.dawm-stagger > *:nth-child(3)  { animation-delay: .06s; }
+.dawm-stagger > *:nth-child(4)  { animation-delay: .08s; }
+.dawm-stagger > *:nth-child(5)  { animation-delay: .10s; }
+.dawm-stagger > *:nth-child(6)  { animation-delay: .12s; }
+.dawm-stagger > *:nth-child(7)  { animation-delay: .14s; }
+.dawm-stagger > *:nth-child(8)  { animation-delay: .16s; }
+.dawm-stagger > *:nth-child(n+9) { animation-delay: .18s; }
+
+.dawm-press {
+  transition: transform .15s ease, box-shadow .2s ease, background-color .2s ease;
+}
+.dawm-press:active { transform: scale(0.94); }
+
+button, [role="button"], a {
+  -webkit-tap-highlight-color: transparent;
+}
+button:active, [role="button"]:active {
+  transition: transform .1s ease;
+  transform: scale(0.97);
+}
+
+.dawm-nav-active-icon { animation: dawm-bounce-icon .4s ease-out; }
+.dawm-points-pulse    { animation: dawm-points-glow .9s ease-out; border-radius: 9999px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .dawm-fade-in, .dawm-slide-up, .dawm-stagger > *,
+  .dawm-nav-active-icon, .dawm-points-pulse { animation: none !important; }
+  button:active, [role="button"]:active, .dawm-press:active { transform: none !important; }
+}
+
+/* =========================================================
+   Theme-matched ornamental backdrop (low opacity)
+   ========================================================= */
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: cover;
+  opacity: 0.07;
+  mix-blend-mode: soft-light;
+}
+[data-theme="night"]::before,
+[data-theme="friday"]::before {
+  background-image: url("./assets/bg-pattern-dark.jpg");
+  opacity: 0.18;
+}
+[data-theme="ramadan"]::before {
+  background-image: url("./assets/bg-pattern-green.jpg");
+  opacity: 0.16;
+}
+[data-theme="day"]::before,
+[data-theme="paper"]::before,
+[data-theme="talia"]::before {
+  background-image: url("./assets/bg-pattern-light.jpg");
+  opacity: 0.20;
+}
+
+/* =========================================================
+   Mushaf — Glassmorphism architectural top bar (theme-adaptive)
+   ========================================================= */
+.mushaf-glassbar {
+  position: relative;
+  background: var(--mushaf-surface);
+  backdrop-filter: blur(12px) saturate(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  border: 1px solid color-mix(in oklab, var(--mushaf-frame) 45%, transparent);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px -10px rgba(0,0,0,0.35), var(--mushaf-glow);
+  transition: background .5s ease, border-color .5s ease, box-shadow .5s ease;
+}
+.mushaf-iconbtn-ghost {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in oklab, var(--mushaf-surface) 80%, transparent);
+  border: 1px solid color-mix(in oklab, var(--mushaf-frame) 50%, transparent);
+  border-radius: 10px;
+  color: var(--mushaf-ornament);
+  transition: background .2s ease, color .25s ease, transform .15s ease;
+}
+.mushaf-iconbtn-ghost:hover {
+  background: color-mix(in oklab, var(--mushaf-gold-soft) 30%, var(--mushaf-surface));
+  color: var(--mushaf-ink);
+}
+.mushaf-center-frame {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  border: 1px solid color-mix(in oklab, var(--mushaf-frame) 60%, transparent);
+  outline: 1px solid color-mix(in oklab, var(--mushaf-frame) 25%, transparent);
+  outline-offset: 2px;
+  border-radius: 8px;
+  background: color-mix(in oklab, var(--mushaf-surface) 60%, transparent);
+  color: var(--mushaf-ink);
+  font-family: var(--font-quran);
+  transition: background .4s ease, color .4s ease, border-color .4s ease;
+}
+.mushaf-playbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--mushaf-ornament);
+  background: color-mix(in oklab, var(--mushaf-ornament) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--mushaf-frame) 45%, transparent);
+  border-radius: 999px;
+  transition: background .25s ease, box-shadow .25s ease, color .2s ease;
+}
+.mushaf-playbtn.is-active {
+  color: var(--mushaf-ink);
+  background: linear-gradient(180deg,
+    color-mix(in oklab, var(--mushaf-gold-soft) 60%, transparent),
+    color-mix(in oklab, var(--mushaf-frame) 50%, transparent));
+  box-shadow: var(--mushaf-glow), inset 0 0 0 1px rgba(255,255,255,0.4);
+}
+
+/* Bottom-sheet shell — themed (replaces hardcoded mushaf-paper backgrounds in sheets) */
+.mushaf-sheet {
+  background: var(--mushaf-paper);
+  background-color: var(--mushaf-paper-solid);
+  color: var(--mushaf-ink);
+  border-top: 2px solid var(--mushaf-frame);
+  box-shadow: 0 -10px 40px -10px rgba(0,0,0,0.45), var(--mushaf-glow);
+}
+.mushaf-modal {
+  background: var(--mushaf-paper);
+  background-color: var(--mushaf-paper-solid);
+  color: var(--mushaf-ink);
+  border: 2px solid var(--mushaf-frame);
+  box-shadow: 0 20px 60px -20px rgba(0,0,0,0.55), var(--mushaf-glow);
+}
+.mushaf-input {
+  background: color-mix(in oklab, var(--mushaf-surface-strong) 70%, transparent);
+  border: 1px solid var(--mushaf-frame);
+  color: var(--mushaf-ink);
+}
+.mushaf-row-hover:hover { background: color-mix(in oklab, var(--mushaf-gold-soft) 22%, transparent); }
+.mushaf-row-active     { background: color-mix(in oklab, var(--mushaf-gold-soft) 32%, transparent); }
+
+
+/* =========================================================
+   Mushaf — Minimal pill bar (header + bottom dock)
+   ========================================================= */
+.mushaf-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0.55rem 0.9rem;
+  min-height: 40px;
+  border-radius: 14px;
+  background: var(--mushaf-surface, #faf3df);
+  border: 1px solid color-mix(in oklab, var(--mushaf-frame, #c2a25b) 38%, transparent);
+  color: var(--mushaf-ink, #5a4220);
+  box-shadow: 0 1px 2px rgba(120, 85, 30, 0.06), 0 8px 18px -14px rgba(120,85,30,0.28);
+  transition: background .25s ease, border-color .25s ease, transform .15s ease, color .25s ease;
+  white-space: nowrap;
+}
+.mushaf-pill:hover { background: var(--mushaf-surface-strong, #f3e7c9); }
+.mushaf-pill:active { transform: scale(0.97); }
+
+.mushaf-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 40px;
+  border-radius: 14px;
+  background: var(--mushaf-surface, #faf3df);
+  border: 1px solid color-mix(in oklab, var(--mushaf-frame, #c2a25b) 38%, transparent);
+  color: var(--mushaf-ink, #5a4220);
+  box-shadow: 0 1px 2px rgba(120, 85, 30, 0.06), 0 8px 18px -14px rgba(120,85,30,0.28);
+  transition: background .25s ease, color .25s ease, transform .15s ease, box-shadow .25s ease;
+}
+.mushaf-pill-btn:hover { background: var(--mushaf-surface-strong, #f3e7c9); }
+.mushaf-pill-btn:active { transform: scale(0.94); }
+.mushaf-pill-btn.is-active {
+  background: linear-gradient(180deg,
+    color-mix(in oklab, var(--mushaf-gold-soft, #e3c98a) 70%, transparent),
+    color-mix(in oklab, var(--mushaf-frame, #c2a25b) 35%, transparent));
+  color: var(--mushaf-ink, #3a2810);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--mushaf-frame) 40%, transparent), var(--mushaf-glow, 0 0 18px rgba(194,162,91,0.35));
+}
+
+.mushaf-surah-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-family: var(--font-arabic, inherit);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--mushaf-ink, #5a4220);
+  background: var(--mushaf-surface, #faf3df);
+  border: 1px solid color-mix(in oklab, var(--mushaf-frame, #c2a25b) 42%, transparent);
+  box-shadow: 0 1px 2px rgba(120, 85, 30, 0.06), 0 6px 14px -12px rgba(120,85,30,0.30);
+  transition: background .25s ease, color .2s ease, transform .15s ease, box-shadow .25s ease;
+  white-space: nowrap;
+}
+.mushaf-surah-chip:hover {
+  background: var(--mushaf-surface-strong, #f3e7c9);
+  color: var(--mushaf-ink, #3a2810);
+}
+.mushaf-surah-chip:active { transform: scale(0.95); }
+@media (max-width: 480px) {
+  .mushaf-surah-chip { min-width: 38px; height: 28px; padding: 0 8px; font-size: 11px; }
+}
+
+.mushaf-bottom-dock {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px;
+  border-radius: 18px;
+  background: color-mix(in oklab, var(--mushaf-surface, #faf3df) 92%, transparent);
+  border: 1px solid color-mix(in oklab, var(--mushaf-frame, #c2a25b) 28%, transparent);
+  box-shadow: 0 10px 30px -16px rgba(120,85,30,0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Splash logo fade-in + gentle scale */
+@keyframes dawm-splash-in {
+  0% { opacity: 0; transform: scale(0.88); filter: blur(6px); }
+  60% { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+.dawm-splash-logo {
+  animation: dawm-splash-in 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
