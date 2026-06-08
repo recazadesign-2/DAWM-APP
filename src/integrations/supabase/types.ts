@@ -414,6 +414,33 @@ export type Database = {
         }
         Relationships: []
       }
+      user_activity: {
+        Row: {
+          activity_type: string
+          created_at: string
+          details: Json | null
+          id: string
+          metadata: Json | null
+          user_id: string
+        }
+        Insert: {
+          activity_type: string
+          created_at?: string
+          details?: Json | null
+          id?: string
+          metadata?: Json | null
+          user_id: string
+        }
+        Update: {
+          activity_type?: string
+          created_at?: string
+          details?: Json | null
+          id?: string
+          metadata?: Json | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_badges: {
         Row: {
           badge_id: string
@@ -434,21 +461,51 @@ export type Database = {
       }
       user_daily_detail: {
         Row: {
+          azkar_evening: Json | null
+          azkar_morning: Json | null
+          completed: boolean
           date: string
+          kahf_completed: boolean
+          last_completed_page: number | null
+          last_read_page: number | null
+          points_awarded: Json | null
+          start_page: number | null
+          target_goal: number | null
           tracked_pages: Json | null
           updated_at: string
+          usage_seconds: number
           user_id: string
         }
         Insert: {
+          azkar_evening?: Json | null
+          azkar_morning?: Json | null
+          completed?: boolean
           date: string
+          kahf_completed?: boolean
+          last_completed_page?: number | null
+          last_read_page?: number | null
+          points_awarded?: Json | null
+          start_page?: number | null
+          target_goal?: number | null
           tracked_pages?: Json | null
           updated_at?: string
+          usage_seconds?: number
           user_id: string
         }
         Update: {
+          azkar_evening?: Json | null
+          azkar_morning?: Json | null
+          completed?: boolean
           date?: string
+          kahf_completed?: boolean
+          last_completed_page?: number | null
+          last_read_page?: number | null
+          points_awarded?: Json | null
+          start_page?: number | null
+          target_goal?: number | null
           tracked_pages?: Json | null
           updated_at?: string
+          usage_seconds?: number
           user_id?: string
         }
         Relationships: []
@@ -494,16 +551,28 @@ export type Database = {
       }
       user_gamification: {
         Row: {
+          current_streak: number
+          last_active_date: string | null
+          level: number
+          longest_streak: number
           total_points: number
           updated_at: string
           user_id: string
         }
         Insert: {
+          current_streak?: number
+          last_active_date?: string | null
+          level?: number
+          longest_streak?: number
           total_points?: number
           updated_at?: string
           user_id: string
         }
         Update: {
+          current_streak?: number
+          last_active_date?: string | null
+          level?: number
+          longest_streak?: number
           total_points?: number
           updated_at?: string
           user_id?: string
@@ -602,6 +671,27 @@ export type Database = {
           created_at?: string
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_wird_settings: {
+        Row: {
+          daily_goal: number
+          locked_until: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          daily_goal?: number
+          locked_until?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          daily_goal?: number
+          locked_until?: string | null
+          updated_at?: string
           user_id?: string
         }
         Relationships: []
