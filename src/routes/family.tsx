@@ -1193,7 +1193,6 @@ function GroupsPage() {
         .from("group_invitations")
         .update({
           status: accept ? "accepted" : "declined",
-          responded_at: new Date().toISOString(),
         })
         .eq("id", inv.id);
       if (uErr) throw uErr;
