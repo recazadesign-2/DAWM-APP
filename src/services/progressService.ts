@@ -264,11 +264,8 @@ class ProgressService {
       data.lastCompletedPage = oldPage;
     }
 
-    if (!isForward) {
-      // Backward navigation invalidates the continuous streak on oldPage
-      entry.continuousMax = 0;
-      this.countingDisabled = true;
-    }
+    // Backward navigation no longer invalidates the streak — the user
+    // may revisit pages freely without losing their continuous-time progress.
 
     data.quranPagesRead = data.trackedPages.filter((p) => p.counted).length;
     this.recomputeKahfAndAwards(data);
@@ -353,9 +350,9 @@ class ProgressService {
   }
 
   private recomputeKahfAndAwards(data: DailyProgress) {
-    const kahfPages = Array.from({ length: 12 }, (_, i) => 293 + i);
-    data.kahfCompleted =
-      data.trackedPages.filter((p) => kahfPages.includes(p.pageNumber) && p.counted).length === 12;
+    // Kahf auto-detection removed — handled manually elsewhere if needed.
+
+
 
     // Standard per-page reward: +5 per newly-counted page
     const paid = data.pointsAwarded.pagesCountedPaid ?? 0;
