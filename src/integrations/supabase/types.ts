@@ -198,6 +198,8 @@ export type Database = {
           group_id: string
           id: string
           joined_at: string
+          points: number
+          progress: number
           role: string
           user_id: string
         }
@@ -205,6 +207,8 @@ export type Database = {
           group_id: string
           id?: string
           joined_at?: string
+          points?: number
+          progress?: number
           role?: string
           user_id: string
         }
@@ -212,6 +216,8 @@ export type Database = {
           group_id?: string
           id?: string
           joined_at?: string
+          points?: number
+          progress?: number
           role?: string
           user_id?: string
         }
@@ -416,26 +422,35 @@ export type Database = {
       }
       user_activity: {
         Row: {
-          activity_type: string
+          activity_type: string | null
           created_at: string
           details: Json | null
+          device_info: Json | null
           id: string
+          last_active_at: string | null
+          last_login_at: string | null
           metadata: Json | null
           user_id: string
         }
         Insert: {
-          activity_type: string
+          activity_type?: string | null
           created_at?: string
           details?: Json | null
+          device_info?: Json | null
           id?: string
+          last_active_at?: string | null
+          last_login_at?: string | null
           metadata?: Json | null
           user_id: string
         }
         Update: {
-          activity_type?: string
+          activity_type?: string | null
           created_at?: string
           details?: Json | null
+          device_info?: Json | null
           id?: string
+          last_active_at?: string | null
+          last_login_at?: string | null
           metadata?: Json | null
           user_id?: string
         }
@@ -551,29 +566,35 @@ export type Database = {
       }
       user_gamification: {
         Row: {
+          current_level: number
           current_streak: number
           last_active_date: string | null
           level: number
           longest_streak: number
           total_points: number
+          total_tasbeeh: number
           updated_at: string
           user_id: string
         }
         Insert: {
+          current_level?: number
           current_streak?: number
           last_active_date?: string | null
           level?: number
           longest_streak?: number
           total_points?: number
+          total_tasbeeh?: number
           updated_at?: string
           user_id: string
         }
         Update: {
+          current_level?: number
           current_streak?: number
           last_active_date?: string | null
           level?: number
           longest_streak?: number
           total_points?: number
+          total_tasbeeh?: number
           updated_at?: string
           user_id?: string
         }
