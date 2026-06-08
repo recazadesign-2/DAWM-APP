@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      analytics_events: {
+        Row: {
+          created_at: string
+          duration_seconds: number | null
+          event_name: string
+          id: string
+          metadata: Json | null
+          page: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          duration_seconds?: number | null
+          event_name: string
+          id?: string
+          metadata?: Json | null
+          page?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          duration_seconds?: number | null
+          event_name?: string
+          id?: string
+          metadata?: Json | null
+          page?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       app_settings: {
         Row: {
           description: string | null
@@ -35,6 +65,30 @@ export type Database = {
           updated_at?: string
           updated_by?: string | null
           value?: Json
+        }
+        Relationships: []
+      }
+      bookmarks: {
+        Row: {
+          created_at: string
+          id: string
+          note: string | null
+          page: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          note?: string | null
+          page: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          note?: string | null
+          page?: number
+          user_id?: string
         }
         Relationships: []
       }
@@ -101,6 +155,93 @@ export type Database = {
         }
         Relationships: []
       }
+      notifications_log: {
+        Row: {
+          body: string
+          created_at: string
+          created_by: string | null
+          failed_count: number
+          id: string
+          sent_count: number
+          title: string
+          url: string | null
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          created_by?: string | null
+          failed_count?: number
+          id?: string
+          sent_count?: number
+          title: string
+          url?: string | null
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          created_by?: string | null
+          failed_count?: number
+          id?: string
+          sent_count?: number
+          title?: string
+          url?: string | null
+        }
+        Relationships: []
+      }
+      points_history: {
+        Row: {
+          action_type: string
+          created_at: string
+          id: string
+          metadata: Json | null
+          multiplier: number
+          points: number
+          user_id: string
+        }
+        Insert: {
+          action_type: string
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          multiplier?: number
+          points: number
+          user_id: string
+        }
+        Update: {
+          action_type?: string
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          multiplier?: number
+          points?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      premium_emails: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          email: string
+          id: string
+          note: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          email: string
+          id?: string
+          note?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          email?: string
+          id?: string
+          note?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -122,6 +263,138 @@ export type Database = {
           display_name?: string | null
           id?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      push_subscriptions: {
+        Row: {
+          auth: string
+          created_at: string
+          endpoint: string
+          id: string
+          p256dh: string
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          auth: string
+          created_at?: string
+          endpoint: string
+          id?: string
+          p256dh: string
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          auth?: string
+          created_at?: string
+          endpoint?: string
+          id?: string
+          p256dh?: string
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      reading_state: {
+        Row: {
+          last_page: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          last_page?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          last_page?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_daily_progress: {
+        Row: {
+          completion_pct: number
+          date: string
+          evening_done: boolean
+          kahf_completed: boolean
+          morning_done: boolean
+          points: number
+          quran_pages_read: number
+          quran_target: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completion_pct?: number
+          date: string
+          evening_done?: boolean
+          kahf_completed?: boolean
+          morning_done?: boolean
+          points?: number
+          quran_pages_read?: number
+          quran_target?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completion_pct?: number
+          date?: string
+          evening_done?: boolean
+          kahf_completed?: boolean
+          morning_done?: boolean
+          points?: number
+          quran_pages_read?: number
+          quran_target?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_prayer_settings: {
+        Row: {
+          latitude: number
+          longitude: number
+          madhab: string
+          method: string
+          notify_asr: boolean
+          notify_dhuhr: boolean
+          notify_fajr: boolean
+          notify_isha: boolean
+          notify_maghrib: boolean
+          timezone: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          latitude: number
+          longitude: number
+          madhab?: string
+          method?: string
+          notify_asr?: boolean
+          notify_dhuhr?: boolean
+          notify_fajr?: boolean
+          notify_isha?: boolean
+          notify_maghrib?: boolean
+          timezone?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          latitude?: number
+          longitude?: number
+          madhab?: string
+          method?: string
+          notify_asr?: boolean
+          notify_dhuhr?: boolean
+          notify_fajr?: boolean
+          notify_isha?: boolean
+          notify_maghrib?: boolean
+          timezone?: string
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -151,7 +424,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_current_user_premium: { Args: never; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "user"
