@@ -414,6 +414,45 @@ export type Database = {
         }
         Relationships: []
       }
+      user_badges: {
+        Row: {
+          badge_id: string
+          earned_at: string
+          user_id: string
+        }
+        Insert: {
+          badge_id: string
+          earned_at?: string
+          user_id: string
+        }
+        Update: {
+          badge_id?: string
+          earned_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_daily_detail: {
+        Row: {
+          date: string
+          tracked_pages: Json | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          date: string
+          tracked_pages?: Json | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          date?: string
+          tracked_pages?: Json | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_daily_progress: {
         Row: {
           completion_pct: number
@@ -448,6 +487,24 @@ export type Database = {
           points?: number
           quran_pages_read?: number
           quran_target?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_gamification: {
+        Row: {
+          total_points: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          total_points?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          total_points?: number
           updated_at?: string
           user_id?: string
         }
@@ -498,6 +555,36 @@ export type Database = {
         }
         Relationships: []
       }
+      user_preferences: {
+        Row: {
+          friday_theme: boolean
+          lossless_audio: boolean
+          notifications_enabled: boolean
+          reminder_time: string | null
+          theme: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          friday_theme?: boolean
+          lossless_audio?: boolean
+          notifications_enabled?: boolean
+          reminder_time?: string | null
+          theme?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          friday_theme?: boolean
+          lossless_audio?: boolean
+          notifications_enabled?: boolean
+          reminder_time?: string | null
+          theme?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -524,7 +611,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      find_user_id_by_email: { Args: { p_email: string }; Returns: string }
+      find_user_id_by_email: { Args: { _email: string }; Returns: string }
       is_current_user_premium: { Args: never; Returns: boolean }
     }
     Enums: {
