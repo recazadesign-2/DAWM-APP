@@ -333,7 +333,7 @@ export function WirdProgress() {
             </span>
             <span className="text-3xl text-muted-foreground/60">/</span>
             <span className="text-3xl text-foreground/70 tabular-nums">
-              {locked ? Math.min(pagesRead, value) : value}
+              {Math.min(pagesRead, value)}
             </span>
           </div>
           <div className="mt-2 flex items-center gap-1 text-[10px] text-muted-foreground/70">
