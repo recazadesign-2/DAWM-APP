@@ -8,6 +8,7 @@ import {
 } from "@/services/notificationService";
 import { syncDailyProgress } from "@/services/dailyProgressService";
 import { ActionType, onActionCompleted } from "@/services/pointsService";
+import { initOutbox } from "@/services/outboxService";
 import "@/services/persistenceService";
 
 interface WirdState {

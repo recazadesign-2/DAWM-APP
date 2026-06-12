@@ -87,6 +87,7 @@ function RootComponent() {
           <OnboardingGate>
             <Outlet />
             <LevelUpOverlay />
+            <OfflineIndicator />
             <Toaster position="top-center" dir="rtl" richColors />
           </OnboardingGate>
         </AppProvider>
