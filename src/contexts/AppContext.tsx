@@ -109,8 +109,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     };
     window.addEventListener("points-changed", onPoints);
     window.addEventListener("progress-changed", onProgress);
-    // bootstrap notifications + service worker
+    // bootstrap notifications + service worker + offline outbox
     ensureServiceWorker();
+    initOutbox();
     return () => {
       window.removeEventListener("points-changed", onPoints);
       window.removeEventListener("progress-changed", onProgress);
