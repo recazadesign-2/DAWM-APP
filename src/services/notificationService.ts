@@ -141,7 +141,8 @@ export function startGapWatcher(enabled: boolean) {
 }
 
 export function ensureServiceWorker() {
+  // Delegates to the safe PWA registration wrapper, which refuses to register
+  // in dev / iframe / Lovable preview and supports the ?sw=off kill switch.
   if (typeof window === "undefined") return;
-  if (!("serviceWorker" in navigator)) return;
-  navigator.serviceWorker.register("/sw.js").catch(() => {});
+  import("./pwaRegister").then((m) => m.registerPwa()).catch(() => {});
 }

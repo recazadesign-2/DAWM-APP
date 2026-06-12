@@ -1,6 +1,8 @@
 // Syncs the current user's local daily progress to user_daily_progress
 // so that Group leaderboards have a real-time source of truth.
+// Offline-safe: goes through the outbox so it survives no-network sessions.
 import { supabase } from "@/integrations/supabase/client";
+import { enqueue } from "@/services/outboxService";
 
 export type DailySync = {
   quranTarget: number;
@@ -56,10 +58,20 @@ export async function syncDailyProgress(data: DailySync) {
   }
   inFlight = true;
   try {
+    if (typeof navigator !== "undefined" && navigator.onLine === false) {
+      // Queue for later; outbox will flush on `online`.
+      enqueue({ type: "daily_progress", payload });
+      lastPayload = sig;
+      return;
+    }
     const { error } = await supabase
       .from("user_daily_progress")
       .upsert(payload, { onConflict: "user_id,date" });
-    if (!error) lastPayload = sig;
+    if (error) {
+      // Fall back to outbox on transient failure
+      enqueue({ type: "daily_progress", payload });
+    }
+    lastPayload = sig;
   } finally {
     inFlight = false;
     if (pending) {
