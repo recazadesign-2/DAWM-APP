@@ -10,6 +10,16 @@ function urlBase64ToUint8Array(base64: string) {
 }
 
 export async function getVapidPublicKey(): Promise<string | null> {
+  // Prefer server env (single source of truth), then fall back to app_settings.
+  try {
+    const res = await fetch("/api/public/vapid-key", { cache: "no-store" });
+    if (res.ok) {
+      const j = (await res.json()) as { key?: string | null };
+      if (j?.key) return j.key;
+    }
+  } catch {
+    /* ignore */
+  }
   const { data } = await supabase.from("app_settings").select("value").eq("key", "vapid_public_key").maybeSingle();
   if (data?.value && typeof data.value === "string") return data.value;
   return null;
