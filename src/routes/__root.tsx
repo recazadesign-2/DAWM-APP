@@ -5,6 +5,7 @@ import { AppProvider } from "@/contexts/AppContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LevelUpOverlay } from "@/components/LevelUpOverlay";
 import { OnboardingGate } from "@/components/OnboardingGate";
+import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { Toaster } from "sonner";
 
 function NotFoundComponent() {
