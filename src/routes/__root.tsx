@@ -5,6 +5,7 @@ import { AppProvider } from "@/contexts/AppContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LevelUpOverlay } from "@/components/LevelUpOverlay";
 import { OnboardingGate } from "@/components/OnboardingGate";
+import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { Toaster } from "sonner";
 
 function NotFoundComponent() {
@@ -33,16 +34,24 @@ export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { title: "دَاوِمْ — DAWM" },
       { name: "description", content: "تطبيق دَاوِمْ الإسلامي للورد اليومي والأذكار والصلاة." },
       { name: "author", content: "Dawm" },
+      { name: "theme-color", content: "#0b1f1a" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
+      { name: "apple-mobile-web-app-title", content: "داوم" },
+      { name: "mobile-web-app-capable", content: "yes" },
       { property: "og:title", content: "دَاوِمْ — DAWM" },
       { property: "og:description", content: "رفيقك للاستقامة على ورد القرآن والأذكار." },
       { property: "og:type", content: "website" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "manifest", href: "/manifest.webmanifest" },
+      { rel: "icon", href: "/icon-192.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -78,6 +87,7 @@ function RootComponent() {
           <OnboardingGate>
             <Outlet />
             <LevelUpOverlay />
+            <OfflineIndicator />
             <Toaster position="top-center" dir="rtl" richColors />
           </OnboardingGate>
         </AppProvider>

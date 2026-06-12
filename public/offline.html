@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>داوم — وضع عدم الاتصال</title>
+    <link rel="icon" href="/icon-192.png" />
+    <style>
+      :root { color-scheme: dark; }
+      html, body { margin: 0; padding: 0; height: 100%; background: #0b1f1a; color: #e8efe9; font-family: system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif; }
+      .wrap { min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 2rem; text-align: center; }
+      img { width: 96px; height: 96px; opacity: .9; }
+      h1 { margin: 0; font-size: 1.4rem; }
+      p { margin: 0; opacity: .8; max-width: 28rem; line-height: 1.7; }
+      button { margin-top: 1rem; background: #1f6f57; color: white; border: 0; border-radius: 12px; padding: .8rem 1.4rem; font-size: 1rem; cursor: pointer; }
+      button:hover { background: #267a64; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <img src="/icon-192.png" alt="داوم" />
+      <h1>لا يوجد اتصال بالإنترنت</h1>
+      <p>يمكنك متابعة قراءة المصحف والأذكار والتسبيح من ذاكرة الجهاز. سنزامن تقدّمك تلقائياً عند عودة الاتصال.</p>
+      <button onclick="location.reload()">إعادة المحاولة</button>
+    </div>
+  </body>
+</html>
