@@ -77,14 +77,11 @@ async function logPointsEvent(
 ) {
   if (points <= 0) return;
   try {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
-    await (supabase.from("points_history" as any) as any).insert({
-      user_id: user.id,
-      action_type: action,
-      points,
-      multiplier,
-      metadata: metadata ?? null,
+    await (supabase.rpc as any)("record_points_event", {
+      _action_type: action,
+      _points: points,
+      _multiplier: multiplier,
+      _metadata: metadata ?? null,
     });
   } catch {
     /* non-blocking audit — never break UX on log failure */
