@@ -298,15 +298,16 @@ const pushDaily = debounce(async (detail?: AnyObj) => {
 const pushBadges = debounce(async () => {
   if (!currentUserId) return;
   const earned = safeRead<Record<string, string>>(LS.badgesEarned) ?? {};
-  const rows = Object.entries(earned).map(([badge_id, earned_at]) => ({
-    user_id: currentUserId!,
-    badge_id,
-    earned_at,
-  }));
-  if (!rows.length) return;
-  await supabase
-    .from("user_badges")
-    .upsert(rows, { onConflict: "user_id,badge_id" });
+  const entries = Object.entries(earned);
+  if (!entries.length) return;
+  await Promise.all(
+    entries.map(([badge_id, earned_at]) =>
+      (supabase.rpc as any)("award_user_badge", {
+        _badge_id: badge_id,
+        _earned_at: earned_at,
+      }),
+    ),
+  );
 }, 1000);
 
 function pushAll() {
