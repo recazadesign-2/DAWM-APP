@@ -776,8 +776,21 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      award_user_badge: {
+        Args: { _badge_id: string; _earned_at?: string }
+        Returns: undefined
+      }
       find_user_id_by_email: { Args: { _email: string }; Returns: string }
       is_current_user_premium: { Args: never; Returns: boolean }
+      record_points_event: {
+        Args: {
+          _action_type: string
+          _metadata?: Json
+          _multiplier?: number
+          _points: number
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "admin" | "user"
