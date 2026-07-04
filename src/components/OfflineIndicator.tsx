@@ -25,7 +25,8 @@ export function OfflineIndicator() {
   return (
     <div
       dir="rtl"
-      className="fixed top-2 left-1/2 -translate-x-1/2 z-[80] flex items-center gap-2 rounded-full bg-amber-600/90 text-white text-xs px-3 py-1.5 shadow-lg backdrop-blur"
+      className="fixed left-1/2 -translate-x-1/2 z-[80] flex items-center gap-2 rounded-full bg-amber-600/90 text-white text-xs px-3 py-1.5 shadow-lg backdrop-blur"
+      style={{ top: "calc(env(safe-area-inset-top) + 0.5rem)" }}
       role="status"
       aria-live="polite"
     >
