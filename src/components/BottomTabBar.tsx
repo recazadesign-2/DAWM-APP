@@ -60,6 +60,7 @@ export function BottomTabBar() {
     <nav
       dir="rtl"
       className="fixed bottom-0 inset-x-0 z-50 flex justify-center px-4 pb-4 pointer-events-none"
+      style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}
     >
       <div
         className="pointer-events-auto relative flex flex-row items-center justify-around gap-1 px-2 py-2 rounded-full border border-border bg-card/90 backdrop-blur-xl w-full max-w-[420px]"
