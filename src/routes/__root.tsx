@@ -6,6 +6,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { LevelUpOverlay } from "@/components/LevelUpOverlay";
 import { OnboardingGate } from "@/components/OnboardingGate";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
+import { SafeArea } from "@/components/SafeArea";
 import { Toaster } from "sonner";
 
 function NotFoundComponent() {
@@ -85,10 +86,17 @@ function RootComponent() {
       <AuthProvider>
         <AppProvider>
           <OnboardingGate>
-            <Outlet />
+            <SafeArea className="min-h-screen">
+              <Outlet />
+            </SafeArea>
             <LevelUpOverlay />
             <OfflineIndicator />
-            <Toaster position="top-center" dir="rtl" richColors />
+            <Toaster
+              position="top-center"
+              dir="rtl"
+              richColors
+              offset="calc(env(safe-area-inset-top) + 1rem)"
+            />
           </OnboardingGate>
         </AppProvider>
       </AuthProvider>

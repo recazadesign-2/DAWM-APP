@@ -335,10 +335,27 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-body);
+  }
+  /* Safe area utilities — apply inside pages / scroll containers so content
+     never renders under the device status bar or home indicator. */
+  .safe-top {
     padding-top: env(safe-area-inset-top);
+  }
+  .safe-bottom {
     padding-bottom: env(safe-area-inset-bottom);
   }
+  .safe-x {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  .safe-min-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+  .safe-min-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
   /* utility classes */
+
   .font-display {
     font-family: var(--font-body); /* نفس Manrope */
   }
