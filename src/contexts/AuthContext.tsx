@@ -10,10 +10,14 @@ interface AuthCtx {
   roleChecked: boolean;
   loading: boolean;
   isGuest: boolean;
+  /** TEMPORARY: full-access test mode (remove later). */
+  isTestMode: boolean;
   termsAccepted: boolean;
   acceptTerms: () => void;
   enterGuestMode: () => void;
   exitGuestMode: () => void;
+  enterTestMode: () => void;
+  exitTestMode: () => void;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signUp: (email: string, password: string, displayName?: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
