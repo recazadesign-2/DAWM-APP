@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { LogIn, UserCircle2 } from "lucide-react";
+import { FlaskConical, LogIn, UserCircle2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import dawmLogoFull from "@/assets/dawm-logo-full.png";
 
