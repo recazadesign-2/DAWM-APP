@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import dawmLogoFull from "@/assets/dawm-logo-full.png";
 
 export function WelcomeScreen() {
-  const { enterGuestMode } = useAuth();
+  const { enterGuestMode, enterTestMode } = useAuth();
   return (
     <main dir="rtl" className="min-h-screen bg-background text-foreground flex items-center justify-center px-5">
       <div className="w-full max-w-[420px] text-center">
