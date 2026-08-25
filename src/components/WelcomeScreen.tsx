@@ -27,6 +27,16 @@ export function WelcomeScreen() {
           >
             <LogIn size={18} /> تسجيل الدخول / إنشاء حساب
           </Link>
+          {/* TEMPORARY: full-access test mode — safe to delete later */}
+          <button
+            onClick={enterTestMode}
+            title="وضع الاختبار"
+            className="shrink-0 px-4 py-4 rounded-2xl border border-dashed border-primary/60 text-primary text-xs font-bold hover:bg-primary/10 transition"
+          >
+            <FlaskConical size={18} className="mx-auto mb-1" />
+            اختبار
+          </button>
+          </div>
           <button
             onClick={enterGuestMode}
             className="w-full inline-flex items-center justify-center gap-2 py-4 rounded-2xl border border-border bg-card text-foreground hover:bg-muted/40 transition"
