@@ -19,6 +19,7 @@ export function WelcomeScreen() {
         </p>
 
         <div className="space-y-3">
+          <div className="flex gap-2">
           <Link
             to="/auth"
             className="w-full inline-flex items-center justify-center gap-2 py-4 rounded-2xl text-primary-foreground font-bold"
