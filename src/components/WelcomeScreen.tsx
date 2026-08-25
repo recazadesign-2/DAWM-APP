@@ -1,10 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { LogIn, UserCircle2 } from "lucide-react";
+import { FlaskConical, LogIn, UserCircle2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import dawmLogoFull from "@/assets/dawm-logo-full.png";
 
 export function WelcomeScreen() {
-  const { enterGuestMode } = useAuth();
+  const { enterGuestMode, enterTestMode } = useAuth();
   return (
     <main dir="rtl" className="min-h-screen bg-background text-foreground flex items-center justify-center px-5">
       <div className="w-full max-w-[420px] text-center">
@@ -19,6 +19,7 @@ export function WelcomeScreen() {
         </p>
 
         <div className="space-y-3">
+          <div className="flex gap-2">
           <Link
             to="/auth"
             className="w-full inline-flex items-center justify-center gap-2 py-4 rounded-2xl text-primary-foreground font-bold"
@@ -26,6 +27,16 @@ export function WelcomeScreen() {
           >
             <LogIn size={18} /> تسجيل الدخول / إنشاء حساب
           </Link>
+          {/* TEMPORARY: full-access test mode — safe to delete later */}
+          <button
+            onClick={enterTestMode}
+            title="وضع الاختبار"
+            className="shrink-0 px-4 py-4 rounded-2xl border border-dashed border-primary/60 text-primary text-xs font-bold hover:bg-primary/10 transition"
+          >
+            <FlaskConical size={18} className="mx-auto mb-1" />
+            اختبار
+          </button>
+          </div>
           <button
             onClick={enterGuestMode}
             className="w-full inline-flex items-center justify-center gap-2 py-4 rounded-2xl border border-border bg-card text-foreground hover:bg-muted/40 transition"

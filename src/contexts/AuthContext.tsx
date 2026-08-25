@@ -10,10 +10,14 @@ interface AuthCtx {
   roleChecked: boolean;
   loading: boolean;
   isGuest: boolean;
+  /** TEMPORARY: full-access test mode (remove later). */
+  isTestMode: boolean;
   termsAccepted: boolean;
   acceptTerms: () => void;
   enterGuestMode: () => void;
   exitGuestMode: () => void;
+  enterTestMode: () => void;
+  exitTestMode: () => void;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signUp: (email: string, password: string, displayName?: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
@@ -23,6 +27,8 @@ const Ctx = createContext<AuthCtx | undefined>(undefined);
 
 const TERMS_KEY = "dawm:terms_accepted";
 const GUEST_KEY = "dawm:guest_mode";
+// TEMPORARY test-mode flag — safe to delete along with enter/exitTestMode.
+const TEST_KEY = "dawm:test_mode";
 export const ADMIN_EMAIL = "eng.moh.ali21@gmail.com";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -34,11 +40,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [isGuest, setIsGuest] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [isTestMode, setIsTestMode] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     setTermsAccepted(localStorage.getItem(TERMS_KEY) === "1");
     setIsGuest(localStorage.getItem(GUEST_KEY) === "1");
+    setIsTestMode(localStorage.getItem(TEST_KEY) === "1");
   }, []);
 
   useEffect(() => {
@@ -108,13 +116,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (typeof window !== "undefined") localStorage.setItem(GUEST_KEY, "1");
     setIsGuest(true);
   };
+  const enterTestMode = () => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(TEST_KEY, "1");
+      localStorage.setItem(TERMS_KEY, "1");
+      localStorage.removeItem(GUEST_KEY);
+    }
+    setTermsAccepted(true);
+    setIsGuest(false);
+    setIsTestMode(true);
+  };
+  const exitTestMode = () => {
+    if (typeof window !== "undefined") localStorage.removeItem(TEST_KEY);
+    setIsTestMode(false);
+  };
   const exitGuestMode = () => {
     if (typeof window !== "undefined") localStorage.removeItem(GUEST_KEY);
     setIsGuest(false);
   };
 
+  // TEMPORARY: in test mode we expose a synthetic user so gated screens open.
+  const effectiveUser: User | null =
+    user ?? (isTestMode ? ({ id: "00000000-0000-0000-0000-000000000000", email: "test@dawm.local" } as User) : null);
+
   return (
-    <Ctx.Provider value={{ session, user, isAdmin, isPremium, roleChecked, loading, isGuest, termsAccepted, acceptTerms, enterGuestMode, exitGuestMode, signIn, signUp, signOut }}>
+    <Ctx.Provider value={{ session, user: effectiveUser, isAdmin: isAdmin || isTestMode, isPremium: isPremium || isTestMode, roleChecked: roleChecked || isTestMode, loading, isGuest: isGuest && !isTestMode, isTestMode, termsAccepted, acceptTerms, enterGuestMode, exitGuestMode, enterTestMode, exitTestMode, signIn, signUp, signOut }}>
       {children}
     </Ctx.Provider>
   );
